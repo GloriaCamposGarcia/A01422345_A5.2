@@ -8,8 +8,8 @@ def main():
         sys.exit(1)
 
     # Simulación de carga de archivos
-    price_file = sys.argv[5]
-    sales_file = sys.argv[6]
+    price_file = sys.argv[1]
+    sales_file = sys.argv[2]
 
     print(f"Archivos recibidos: {price_file} y {sales_file}")
 
