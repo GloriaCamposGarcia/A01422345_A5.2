@@ -6,6 +6,7 @@ import sys
 import time
 import json
 
+
 def load_json(file_path):
     """Carga archivos JSON y maneja datos inválidos."""
     try:
@@ -15,6 +16,7 @@ def load_json(file_path):
         # Muestra el error y continua la ejecución
         print(f"Error procesando '{file_path}': {error}")
         return None
+
 
 def calculate_total(catalogue, sales):
     """Calcula el costo total de catálogo y ventas."""
@@ -36,16 +38,17 @@ def calculate_total(catalogue, sales):
         if product in price_map:
             total += price_map[product] * quantity
         else:
-            print(f"Advertencia: El producto '{product}' no está en el catálogo.")
+            print(f"El producto '{product}' no está en el catálogo.")
     return total
+
 
 def main():
     """Función principal para coordinar la ejecución."""
     start_time = time.time()  # Inicio de tiempo
 
-    # Validar que se reciban los dos archivos como parámetros: python computeSales.py file1 file2
+    # Validar que se reciban los dos archivos como parámetros
     if len(sys.argv) != 3:
-        print("Uso: python computeSales.py priceCatalogue.json salesRecord.json")
+        print("python computeSales.py priceCatalogue.json salesRecord.json")
         sys.exit(1)
 
     # Simulación de carga de archivos
@@ -82,6 +85,7 @@ def main():
             f.write(results)
     except IOError as e:
         print(f"Error al escribir el archivo: {e}")
+
 
 if __name__ == "__main__":
     main()
