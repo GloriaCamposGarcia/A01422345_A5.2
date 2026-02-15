@@ -41,10 +41,35 @@ def main():
     price_file = sys.argv[1]
     sales_file = sys.argv[2]
 
-    print(f"Archivos recibidos: {price_file} y {sales_file}")
+    # Llamar a las funciones
+    catalogue_data = load_json(price_file)
+    sales_data = load_json(sales_file)
 
+    if catalogue_data is None or sales_data is None:
+        print("Error: No se pudieron cargar los datos necesarios.")
+        return
+
+    # Asignar a total_cost para evitar NameError
+    total_cost = calculate_total(catalogue_data, sales_data)
+
+    print(f"Archivos recibidos: {price_file} y {sales_file}")
     elapsed_time = time.time() - start_time  # Tiempo transcurrido
-    print(f"Time elapsed: {elapsed_time:.4f} seconds")
+
+    results = (
+        "---------- Sales Results ----------\n"
+        f"Total Sales Cost: ${total_cost:,.2f}\n"
+        f"Execution Time: {elapsed_time:.4f} seconds\n"
+        "-----------------------------------\n"
+    )
+
+    # Req 2: Imprimir en pantalla y en archivo
+    print(results)
+
+    try:
+        with open("A01422345_A5.2\results\SalesResults.txt", "w", encoding='utf-8') as f:
+            f.write(results)
+    except IOError as e:
+        print(f"Error al escribir el archivo: {e}")
 
 if __name__ == "__main__":
     main()
