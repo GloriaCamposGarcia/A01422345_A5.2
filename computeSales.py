@@ -16,11 +16,18 @@ def calculate_total(catalogue, sales):
     """Calcula el costo total de catálogo y ventas."""
     total = 0.0
     # Crea mapa de precios para eficiencia
-    price_map = {item['title']: item['price'] for item in catalogue if 'title' in item}
+    price_map = {}
+    # Soporta tanto 'title'/'price' como 'Product'/'Price'
+    for item in catalogue:
+        name = item.get('title') or item.get('Product')
+        price = item.get('price') or item.get('Price')
+        if name is not None:
+            price_map[name] = price
 
     for sale in sales:
-        product = sale.get('product')
-        quantity = sale.get('quantity', 0)
+        # Intenta obtener el nombre del producto en ambos formatos
+        product = sale.get('product') or sale.get('Product')
+        quantity = sale.get('quantity') or sale.get('Quantity') or 0
         
         if product in price_map:
             total += price_map[product] * quantity
@@ -66,7 +73,8 @@ def main():
     print(results)
 
     try:
-        with open("A01422345_A5.2\results\SalesResults.txt", "w", encoding='utf-8') as f:
+        file_name = r"results\SalesResults.txt"
+        with open(file_name, "w", encoding='utf-8') as f:
             f.write(results)
     except IOError as e:
         print(f"Error al escribir el archivo: {e}")

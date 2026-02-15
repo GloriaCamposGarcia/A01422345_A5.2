@@ -1,0 +1,4 @@
+---------- Sales Results ----------
+Total Sales Cost: $2,481.86
+Execution Time: 0.0516 seconds
+-----------------------------------
