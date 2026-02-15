@@ -81,8 +81,9 @@ def main():
 
     try:
         file_name = r"results\SalesResults.txt"
-        with open(file_name, "w", encoding='utf-8') as f:
+        with open(file_name, "a", encoding='utf-8') as f:
             f.write(results)
+            f.write("\n")
     except IOError as e:
         print(f"Error al escribir el archivo: {e}")
 
