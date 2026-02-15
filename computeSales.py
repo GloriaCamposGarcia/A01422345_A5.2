@@ -1,5 +1,16 @@
 import sys
 import time
+import json
+
+def load_json(file_path):
+    """Carga archivos JSON y maneja datos inválidos."""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            return json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError) as error:
+        # Muestra el error y continua la ejecución
+        print(f"Error procesando '{file_path}': {error}")
+        return None
 
 def main():
     start_time = time.time()  # Inicio de tiempo
