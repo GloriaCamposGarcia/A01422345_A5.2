@@ -1,3 +1,7 @@
+"""
+Programa para calcular el costo total de ventas a partir de un catálogo JSON.
+"""
+
 import sys
 import time
 import json
@@ -28,7 +32,7 @@ def calculate_total(catalogue, sales):
         # Intenta obtener el nombre del producto en ambos formatos
         product = sale.get('product') or sale.get('Product')
         quantity = sale.get('quantity') or sale.get('Quantity') or 0
-        
+
         if product in price_map:
             total += price_map[product] * quantity
         else:
@@ -36,9 +40,9 @@ def calculate_total(catalogue, sales):
     return total
 
 def main():
+    """Función principal para coordinar la ejecución."""
     start_time = time.time()  # Inicio de tiempo
 
-    """Función principal para coordinar la ejecución."""
     # Validar que se reciban los dos archivos como parámetros: python computeSales.py file1 file2
     if len(sys.argv) != 3:
         print("Uso: python computeSales.py priceCatalogue.json salesRecord.json")
